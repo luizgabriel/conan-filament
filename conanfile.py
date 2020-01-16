@@ -62,7 +62,7 @@ conan_basic_setup()''')
             "ibl"
         ]
 
-        if self.options.with_filameshio:
+        if self.options.with_libs:
         	self.cpp_info.libs += [
 				"filamat",
 				"filamat_lite",
