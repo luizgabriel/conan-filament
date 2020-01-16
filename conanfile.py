@@ -11,8 +11,8 @@ class FilamentConan(ConanFile):
     description = "<Description of Filament here>"
     topics = ("<Put some tag here>", "<here>", "<and here>")
     settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [True, False]}
-    default_options = {"shared": False}
+    options = {"shared": [True, False], "with_filameshio": [True, False]}
+    default_options = {"shared": False, "with_filameshio": True}
     generators = "cmake"
 
     def source(self):
@@ -61,4 +61,7 @@ conan_basic_setup()''')
             "smol-v",
             "ibl"
         ]
+
+        if self.options.with_filameshio:
+        	self.cpp_info.libs.append("filameshio");
 
