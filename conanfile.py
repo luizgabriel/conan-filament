@@ -11,8 +11,8 @@ class FilamentConan(ConanFile):
     description = "<Description of Filament here>"
     topics = ("<Put some tag here>", "<here>", "<and here>")
     settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [True, False], "with_libs": [True, False]}
-    default_options = {"shared": False, "with_libs": True}
+    options = {"shared": [True, False]}
+    default_options = {"shared": False}
     generators = "cmake"
 
     def source(self):
@@ -51,6 +51,7 @@ conan_basic_setup()''')
 
         self.cpp_info.libdirs = [ lib_dir ]
         self.cpp_info.libs = [
+	    # Required to link with filament
             "filament",
             "backend",
             "bluegl",
@@ -59,21 +60,17 @@ conan_basic_setup()''')
             "utils",
             "geometry",
             "smol-v",
-            "ibl"
+            "ibl",
+		
+	    # Extra tools
+	    "filamat",
+            "filameshio",
+            "gltfio",
+            "gltfio_core",
+            "image",
+            "matdbg",
+            "meshoptimizer",
+            "rays",
+            "shaders",
         ]
-
-        if self.options.with_libs:
-        	self.cpp_info.libs += [
-				"filamat",
-				"filamat_lite",
-				"filameshio",
-				"gltfio",
-				"gltfio_core",
-				"image",
-				"matdbg",
-				"meshoptimizer",
-				"rays",
-				"shaders",
-				"utils"
-        	]
 
