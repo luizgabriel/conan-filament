@@ -4,12 +4,12 @@ from conans.errors import ConanInvalidConfiguration
 
 class FilamentConan(ConanFile):
     name = "filament"
-    version = "1.4.3"
-    license = "<Put the package license here>"
-    author = "<Put your name here> <And your email here>"
-    url = "<Package recipe repository url here, for issues about the package>"
-    description = "<Description of Filament here>"
-    topics = ("<Put some tag here>", "<here>", "<and here>")
+    version = "1.4.4"
+    license = "Apache License 2.0"
+    homepage = "https://github.com/google/filament"
+    url = "https://github.com/luizgabriel/conan-filament"
+    description = "Filament is a real-time physically based rendering engine for Android, iOS, Windows, Linux, macOS and WASM/WebGL"
+    topics = ("graphics", "3d", "filament", "google")
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False]}
     default_options = {"shared": False}
@@ -51,7 +51,7 @@ conan_basic_setup()''')
 
         self.cpp_info.libdirs = [ lib_dir ]
         self.cpp_info.libs = [
-	    # Required to link with filament
+	    	# Required to link with filament
             "filament",
             "backend",
             "bluegl",
@@ -62,8 +62,8 @@ conan_basic_setup()''')
             "smol-v",
             "ibl",
 		
-	    # Extra tools
-	    "filamat",
+	    	# Extra tools
+	    	"filamat",
             "filameshio",
             "gltfio",
             "gltfio_core",
