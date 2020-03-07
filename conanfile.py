@@ -11,8 +11,8 @@ class FilamentConan(ConanFile):
     description = "Filament is a real-time physically based rendering engine for Android, iOS, Windows, Linux, macOS and WASM/WebGL"
     topics = ("graphics", "3d", "filament", "google")
     settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [True, False]}
-    default_options = {"shared": False}
+    options = {"shared": [True, False], "skip_samples": [True, False]}
+    default_options = {"shared": False, "skip_samples": True}
     generators = "cmake"
 
     def source(self):
@@ -27,6 +27,7 @@ conan_basic_setup()''')
     def _configure_cmake(self):
         cmake = CMake(self)
         cmake.definitions["ENABLE_JAVA"] = "OFF"
+	cmake.definitions["FILAMENT_SKIP_SAMPLES"] = "ON" if self.options["skip_samples"] else "OFF"
         cmake.configure(source_dir="filament")
 
         return cmake
