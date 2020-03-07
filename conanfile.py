@@ -4,7 +4,7 @@ from conans.errors import ConanInvalidConfiguration
 
 class FilamentConan(ConanFile):
     name = "filament"
-    version = "1.4.5"
+    version = "dev-master"
     license = "Apache License 2.0"
     homepage = "https://github.com/google/filament"
     url = "https://github.com/luizgabriel/conan-filament"
@@ -17,7 +17,7 @@ class FilamentConan(ConanFile):
 
     def source(self):
         git = tools.Git(folder="filament")
-        git.clone("https://github.com/google/filament.git", "v" + self.version)
+        git.clone("https://github.com/google/filament.git", "master")
 
         tools.replace_in_file("filament/CMakeLists.txt", "project(TNT)",
                               '''project(TNT)
