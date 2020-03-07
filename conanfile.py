@@ -4,7 +4,7 @@ from conans.errors import ConanInvalidConfiguration
 
 class FilamentConan(ConanFile):
     name = "filament"
-    version = "1.4.4"
+    version = "1.4.5"
     license = "Apache License 2.0"
     homepage = "https://github.com/google/filament"
     url = "https://github.com/luizgabriel/conan-filament"
@@ -26,12 +26,6 @@ conan_basic_setup()''')
 
     def _configure_cmake(self):
         toolset = "LLVM" if self.settings.compiler == "Visual Studio" else None
-        is_windows = self.settings.os == "Windows"
-        valid_toolset = self.settings.compiler.toolset in ["LLVM", "ClangCl"]
-
-        if is_windows and not valid_toolset:
-            raise ConanInvalidConfiguration("Only LLVM/ClangCl toolset suported.")
-
         cmake = CMake(self, toolset=toolset)
         cmake.definitions["ENABLE_JAVA"] = "OFF"
         cmake.configure(source_dir="filament")
@@ -51,7 +45,7 @@ conan_basic_setup()''')
 
         self.cpp_info.libdirs = [ lib_dir ]
         self.cpp_info.libs = [
-	    	# Required to link with filament
+	    # Required to link with filament
             "filament",
             "backend",
             "bluegl",
@@ -62,8 +56,8 @@ conan_basic_setup()''')
             "smol-v",
             "ibl",
 		
-	    	# Extra tools
-	    	"filamat",
+	    # Extra lib tools
+	    "filamat",
             "filameshio",
             "gltfio",
             "gltfio_core",
