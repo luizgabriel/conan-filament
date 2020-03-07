@@ -27,7 +27,7 @@ conan_basic_setup()''')
     def _configure_cmake(self):
         cmake = CMake(self)
         cmake.definitions["FILAMENT_ENABLE_JAVA"] = "ON" if self.options["enable_java"] else "OFF"
-	cmake.definitions["FILAMENT_SKIP_SAMPLES"] = "ON" if self.options["skip_samples"] else "OFF"
+        cmake.definitions["FILAMENT_SKIP_SAMPLES"] = "ON" if self.options["skip_samples"] else "OFF"
         cmake.configure(source_dir="filament")
 
         return cmake
@@ -43,9 +43,9 @@ conan_basic_setup()''')
     def package_info(self):
         lib_dir = f"lib/{self.settings.arch}"
 
-        self.cpp_info.libdirs = [ lib_dir ]
+        self.cpp_info.libdirs = [lib_dir]
         self.cpp_info.libs = [
-	    # Required to link with filament
+            # Required to link with filament
             "filament",
             "backend",
             "bluegl",
@@ -55,9 +55,9 @@ conan_basic_setup()''')
             "geometry",
             "smol-v",
             "ibl",
-		
-	    # Extra lib tools
-	    "filamat",
+
+            # Extra lib tools
+            "filamat",
             "filameshio",
             "gltfio",
             "gltfio_core",
@@ -67,4 +67,3 @@ conan_basic_setup()''')
             "rays",
             "shaders",
         ]
-
