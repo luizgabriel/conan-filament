@@ -25,8 +25,7 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()''')
 
     def _configure_cmake(self):
-        toolset = "LLVM" if self.settings.compiler == "Visual Studio" else None
-        cmake = CMake(self, toolset=toolset)
+        cmake = CMake(self)
         cmake.definitions["ENABLE_JAVA"] = "OFF"
         cmake.configure(source_dir="filament")
 
