@@ -104,7 +104,7 @@ conan_basic_setup()''')
             if self.options["with_" + extra_lib]:
                 self.cpp_info.libs.append(extra_lib)
 
-        # External integrated libs
+        # External libs (integrated with package)
         if self.options["with_sdl"]:
             self.cpp_info.libs.append("sdl2")
             self.cpp_info.libs.append("sdl2main")
