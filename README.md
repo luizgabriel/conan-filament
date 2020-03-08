@@ -6,7 +6,7 @@ The Google's Filament Rendering Engine as a conan package.
 ```
 git clone https://github.com/luizgabriel/conan-filament.git
 cd conan-filament
-conan create . google/stable
+conan export . google/stable
 ```
 
 In your conanfile.txt, add:
