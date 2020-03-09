@@ -19,8 +19,8 @@ filament/1.4.5@google/stable
 bin, * -> ./bin
 ```
 
-### Necessary Steps
-If you're using Windows you'll need some extra steps to make it work. By default, Conan will look for a MinGW installation looking for GCC, and that's not what we want. You'll need to configure a special conan profile to be able with compile correctly this engine. So, find the profiles folder in `C:\\Users\%USERNAME%\.conan\profiles` and create a file called `clang` (without extension) and put this:
+### Necessary Steps (Windows Only)
+If you're using Windows, you'll need some extra steps to make it work. By default, Conan will look for a MinGW installation looking for GCC, and that's not what we want. You'll need to configure a special conan profile to be able with compile correctly this engine. So, find the profiles folder in `C:\\Users\%USERNAME%\.conan\profiles` and create a file called `clang` (without extension) and put this:
 ```
 [settings]
 os=Windows
