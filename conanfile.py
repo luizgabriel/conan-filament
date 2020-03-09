@@ -60,7 +60,7 @@ conan_basic_setup()''')
     def _configure_cmake(self):
         toolset = self.settings.compiler.toolset
         is_windows = self.settings.os == "Windows"
-        is_valid_toolset = toolset in ["LLVM", "ClangCl"]
+        is_valid_toolset = str(toolset).lower() in ["llvm", "clangcl"]
 
         if is_windows and not is_valid_toolset:
             raise ConanInvalidConfiguration("Only LLVM/ClangCl toolset supported.")
