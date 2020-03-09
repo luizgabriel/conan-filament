@@ -1,3 +1,5 @@
+import os
+
 from conans import ConanFile, CMake, tools
 from conans.errors import ConanInvalidConfiguration
 
@@ -68,6 +70,16 @@ conan_basic_setup()''')
         cmake = CMake(self, toolset=toolset)
         cmake.definitions["ENABLE_JAVA"] = "ON" if self.options["enable_java"] else "OFF"
         cmake.definitions["BUILD_TESTING"] = "OFF"
+
+        cc = self.env.get("CC", None)
+        if cc and os.path.exists(cc):
+            cmake.definitions["CMAKE_C_COMPILER"] = cc
+
+        cxx = self.env.get("CXX", None)
+        if cxx and os.path.exists(cxx):
+            cmake.definitions["CMAKE_CXX_COMPILER"] = cxx
+            cmake.definitions["CONAN_DISABLE_CHECK_COMPILER"] = "ON"
+
         cmake.configure(source_dir="filament")
 
         return cmake
