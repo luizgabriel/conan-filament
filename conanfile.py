@@ -21,6 +21,7 @@ class FilamentConan(ConanFile):
     }
     default_options = {
         "shared": False,
+        "enable_java": False,
         "with_filamat": False,
     }
     generators = "cmake"
