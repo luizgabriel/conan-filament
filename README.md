@@ -30,7 +30,7 @@ arch_build=x86_64
 
 compiler=Visual Studio
 compiler.version=16
-compiler.toolset=ClangCl
+compiler.toolset=LLVM
 compiler.runtime=MTd
 compiler.cppstd=17
 
@@ -45,15 +45,26 @@ CC=C:/PROGRA~1/LLVM/bin/clang-cl.exe
 CXX=C:/PROGRA~1/LLVM/bin/clang-cl.exe
 ```
 
-You'll need do install [Visual Studio 2019 Community](https://visualstudio.microsoft.com/pt-br/downloads/)
-  > Make sure to mark these options:
-  >
-  > ![LLVM Option](https://devblogs.microsoft.com/cppblog/wp-content/uploads/sites/9/2019/04/Clang-Compilers-for-Windows-Installer-Annotated.png)
-  
-Then download [LLVM](http://releases.llvm.org/download.html) and [CMake](https://cmake.org/download/)
+Requirements:
+- Visual Studio 2019 and 2017 (Yes, both)
+- The [LLVM Toolchain](https://marketplace.visualstudio.com/items?itemName=LLVMExtensions.llvm-toolchain)
+
+In other to this `LLVM` toolchain to work, you'll need to change the `.conan\settings.yml` file with:
+```yml
+Visual Studio: &visual_studio
+    runtime: [MD, MT, MTd, MDd] # <--- Add "MT" and "MTd"
+    version: ["8", "9", "10", "11", "12", "14", "15", "16"]
+    toolset: [None, v90, v100, v110, v110_xp, v120, v120_xp,
+              v140, v140_xp, v140_clang_c2, LLVM-vs2012, LLVM-vs2012_xp,
+              LLVM-vs2013, LLVM-vs2013_xp, LLVM-vs2014, LLVM-vs2014_xp,
+              LLVM-vs2017, LLVM-vs2017_xp, v141, v141_xp, v141_clang_c2, v142, 
+              ClangCl, LLVM] # <--- add this
+    cppstd: [None, 14, 17, 20]
+```
 
 Now, just:
 ```sh
 conan create . google/stable -pr=clang
 ```
-This command will export the package and build with the clang profile. Now you'll just need to integrate it in you project. Here's an [example project](https://github.com/luizgabriel/Spatial.Engine) were I fully use this package.
+This command will export the package and build with the clang profile. Now you'll just need to integrate it in you project. 
+Here's an [example project](https://github.com/luizgabriel/Spatial.Engine) were I fully use this package.
