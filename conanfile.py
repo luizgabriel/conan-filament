@@ -17,36 +17,11 @@ class FilamentConan(ConanFile):
     options = {
         "shared": [True, False],
         "enable_java": [True, False],
-
         "with_filamat": [True, False],
-        "with_filameshio": [True, False],
-        "with_gltfio": [True, False],
-        "with_gltfio_core": [True, False],
-        "with_image": [True, False],
-        "with_matdbg": [True, False],
-        "with_meshoptimizer": [True, False],
-        "with_rays": [True, False],
-        "with_shaders": [True, False],
-
-        "with_sdl": [True, False],
-        "with_imgui": [True, False]
     }
     default_options = {
         "shared": False,
-        "enable_java": False,
-
         "with_filamat": False,
-        "with_filameshio": False,
-        "with_gltfio": False,
-        "with_gltfio_core": False,
-        "with_image": False,
-        "with_matdbg": False,
-        "with_meshoptimizer": False,
-        "with_rays": False,
-        "with_shaders": False,
-
-        "with_sdl": False,
-        "with_imgui": False
     }
     generators = "cmake"
 
@@ -109,16 +84,17 @@ conan_basic_setup()''')
             "geometry",
             "smol-v",
             "ibl"
+            
+            # Extra lib tools
+            "filameshio",
+            "gltfio",
+            "gltfio_core",
+            "image",
+            "matdbg",
+            "meshoptimizer",
+            "rays",
+            "shaders"
         ]
 
-        # Extra lib tools
-        extra_libs = ["filamat", "filameshio", "gltfio", "gltfio_core", "image", "matdbg", "meshoptimizer",
-                      "rays", "shaders"]
-        for extra_lib in extra_libs:
-            if self.options["with_" + extra_lib]:
-                self.cpp_info.libs.append(extra_lib)
-
-        # External libs (integrated with package)
-        if self.options["with_sdl"]:
-            self.cpp_info.libs.append("sdl2")
-            self.cpp_info.libs.append("sdl2main")
+        if self.options["with_filamat"]:
+            self.cpp_info.libs.append("filamat")
