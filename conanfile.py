@@ -16,13 +16,11 @@ class FilamentConan(ConanFile):
     settings = ("os", "compiler", "build_type", "arch")
     options = {
         "shared": [True, False],
-        "enable_java": [True, False],
-        "with_filamat": [True, False],
+        "enable_java": [True, False]
     }
     default_options = {
         "shared": False,
-        "enable_java": False,
-        "with_filamat": False,
+        "enable_java": False
     }
     generators = "cmake"
 
@@ -75,27 +73,9 @@ conan_basic_setup()''')
 
         self.cpp_info.libdirs = [lib_dir]
         self.cpp_info.libs = [
-            # Required to link with filament
-            "filament",
-            "backend",
-            "bluegl",
-            "filabridge",
-            "filaflat",
-            "utils",
-            "geometry",
-            "smol-v",
-            "ibl"
-            
-            # Extra lib tools
-            "filameshio",
-            "gltfio",
-            "gltfio_core",
-            "image",
-            "matdbg",
-            "meshoptimizer",
-            "rays",
-            "shaders"
+            "backend",     "filamat",       "gltfio",       "meshoptimizer",
+            "bluegl",      "filamat_lite",  "gltfio_core",  "rays",
+            "camutils",    "filament",      "ibl",          "shaders",
+            "filabridge",  "filameshio",    "image",        "smol-v",
+            "filaflat",    "geometry",      "matdbg",       "utils",
         ]
-
-        if self.options["with_filamat"]:
-            self.cpp_info.libs.append("filamat")
