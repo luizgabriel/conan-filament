@@ -1,7 +1,7 @@
 import os
 
 from conans import ConanFile, CMake, tools
-from conans.errors import ConanInvalidConfiguration
+from conans.errors import ConanInvalidConfiguration, ConanException
 
 
 class FilamentConan(ConanFile):
@@ -33,16 +33,22 @@ class FilamentConan(ConanFile):
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()''')
         
+    @property
+    def toolset(self):
+        try:
+            return str(self.settings.compiler.toolset)
+        except ConanException:
+            return None
+        
     def configure(self):
         is_windows = str(self.settings.os).lower() == "windows"
-        is_valid_toolset = str(self.settings.compiler.get("toolset")).lower() in ["llvm", "clangcl"]
+        is_valid_toolset = self.toolset.lower() in ["llvm", "clangcl"]
 
         if is_windows and not is_valid_toolset:
             raise ConanInvalidConfiguration("Only LLVM/ClangCl toolset supported.")
 
     def _configure_cmake(self):
-        toolset = str(self.settings.compiler.get("toolset"))
-        cmake = CMake(self, toolset=toolset)
+        cmake = CMake(self, toolset=self.toolset)
         cmake.definitions["ENABLE_JAVA"] = "ON" if self.options["enable_java"] else "OFF"
         cmake.definitions["BUILD_TESTING"] = "OFF"
 
