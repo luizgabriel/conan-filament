@@ -57,7 +57,7 @@ conan_basic_setup()''')
         if cxx and os.path.exists(cxx):
             cmake.definitions["CMAKE_CXX_COMPILER"] = cxx
 
-        if toolset == "clangcl":
+        if self.opt_toolset == "clangcl":
             cmake.definitions["CONAN_DISABLE_CHECK_COMPILER"] = "ON"
 
         cmake.configure(source_dir="filament")
