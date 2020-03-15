@@ -34,7 +34,7 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()''')
         
     @property
-    def toolset(self):
+    def opt_toolset(self):
         try:
             return str(self.settings.compiler.toolset)
         except ConanException:
@@ -42,13 +42,13 @@ conan_basic_setup()''')
         
     def configure(self):
         is_windows = str(self.settings.os).lower() == "windows"
-        is_valid_toolset = self.toolset.lower() in ["llvm", "clangcl"]
+        is_valid_toolset = str(self.opt_toolset).lower() in ["llvm", "clangcl"]
 
         if is_windows and not is_valid_toolset:
             raise ConanInvalidConfiguration("Only LLVM/ClangCl toolset supported.")
 
     def _configure_cmake(self):
-        cmake = CMake(self, toolset=self.toolset)
+        cmake = CMake(self, toolset=self.opt_toolset)
         cmake.definitions["ENABLE_JAVA"] = "ON" if self.options["enable_java"] else "OFF"
         cmake.definitions["BUILD_TESTING"] = "OFF"
 
