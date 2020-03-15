@@ -35,10 +35,7 @@ conan_basic_setup()''')
         
     @property
     def opt_toolset(self):
-        try:
-            return str(self.settings.compiler.toolset)
-        except ConanException:
-            return None
+        return self.settings.get_safe("compiler.toolset")
         
     def configure(self):
         is_windows = str(self.settings.os).lower() == "windows"
