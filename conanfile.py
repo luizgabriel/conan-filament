@@ -59,6 +59,9 @@ conan_basic_setup()''')
 
         if self.opt_toolset == "clangcl":
             cmake.definitions["CONAN_DISABLE_CHECK_COMPILER"] = "ON"
+            
+        if self.settings.os == "Linux":
+            cmake.definitions["FILAMENT_REQUIRES_CXXABI"] = "ON"
 
         cmake.configure(source_dir="filament")
 
