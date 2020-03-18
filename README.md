@@ -1,7 +1,7 @@
 # conan-filament
 The Google's Filament Rendering Engine as a conan package.
 
-### Installation
+## Installation
 
 ```
 git clone https://github.com/luizgabriel/conan-filament.git
@@ -18,6 +18,23 @@ filament/1.4.5@google/stable
 # imports filament tools
 bin, * -> ./bin
 ```
+
+## Requirements
+To build Filament, you must first install the following tools:
+
+- CMake 3.10 (or more recent)
+- clang 7.0 (or more recent)
+- ninja 1.8 (or more recent)
+
+### Necessary Steps (Linux Only)
+Make sure you've installed the following dependencies:
+
+- `clang-7` or higher
+- `libglu1-mesa-dev`
+- `libc++-7-dev` (libcxx-devel and libcxx-static on Fedora) or higher
+- `libc++abi-7-dev` (libcxxabi-static on Fedora) or higher
+- `ninja-build`
+- `libxi-dev`
 
 ### Necessary Steps (Windows Only)
 If you're using Windows, you'll need some extra steps to make it work. By default, Conan will look for a MinGW installation looking for GCC, and that's not what we want. You'll need to configure a special conan profile to be able with compile correctly this package. So, find the profiles folder in `C:\\Users\%USERNAME%\.conan\profiles` and create a file called `clang` (without extension) and put this:
