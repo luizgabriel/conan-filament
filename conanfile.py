@@ -23,6 +23,7 @@ class FilamentConan(ConanFile):
         "enable_java": False
     }
     generators = "cmake"
+    build_requires = "cmake_installer/3.10.0@conan/stable"
 
     def source(self):
         git = tools.Git(folder="filament")
