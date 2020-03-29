@@ -50,14 +50,6 @@ conan_basic_setup()''')
         cmake.definitions["ENABLE_JAVA"] = "ON" if self.options["enable_java"] else "OFF"
         cmake.definitions["BUILD_TESTING"] = "OFF"
 
-        cc = self.env.get("CC", None)
-        if cc and os.path.exists(cc):
-            cmake.definitions["CMAKE_C_COMPILER"] = cc
-
-        cxx = self.env.get("CXX", None)
-        if cxx and os.path.exists(cxx):
-            cmake.definitions["CMAKE_CXX_COMPILER"] = cxx
-
         if self.opt_toolset == "clangcl":
             cmake.definitions["CONAN_DISABLE_CHECK_COMPILER"] = "ON"
             
