@@ -49,17 +49,8 @@ compiler=Visual Studio
 compiler.version=16
 compiler.toolset=LLVM
 compiler.runtime=MTd
-compiler.cppstd=17
 
-build_type=Release
-
-[options]
-
-[build_requires]
-
-[env]
-CC=C:/PROGRA~1/LLVM/bin/clang-cl.exe
-CXX=C:/PROGRA~1/LLVM/bin/clang-cl.exe
+build_type=Debug
 ```
 
 Requirements:
