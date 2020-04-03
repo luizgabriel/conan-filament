@@ -37,21 +37,12 @@ conan_basic_setup()''')
     @property
     def opt_toolset(self):
         return self.settings.get_safe("compiler.toolset")
-        
-    def configure(self):
-        is_windows = str(self.settings.os).lower() == "windows"
-        is_valid_toolset = str(self.opt_toolset).lower() in ["llvm", "clangcl"]
-
-        if is_windows and not is_valid_toolset:
-            raise ConanInvalidConfiguration("Only LLVM/ClangCl toolset supported.")
 
     def _configure_cmake(self):
         cmake = CMake(self, toolset=self.opt_toolset)
         cmake.definitions["ENABLE_JAVA"] = "ON" if self.options["enable_java"] else "OFF"
         cmake.definitions["BUILD_TESTING"] = "OFF"
-
-        if self.opt_toolset == "clangcl":
-            cmake.definitions["CONAN_DISABLE_CHECK_COMPILER"] = "ON"
+        cmake.definitions["CONAN_DISABLE_CHECK_COMPILER"] = "ON"
             
         cmake.configure(source_dir="filament")
 
