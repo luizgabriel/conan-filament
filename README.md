@@ -63,7 +63,7 @@ Visual Studio: &visual_studio
 
 Now, just:
 ```sh
-conan create . google/stable -pr=clang
+conan create . google/stable
 ```
 This command will export the package and build with the clang profile. Now you'll just need to integrate it in you project. 
 Here's an [example project](https://github.com/luizgabriel/Spatial.Engine) were I fully use this package.
