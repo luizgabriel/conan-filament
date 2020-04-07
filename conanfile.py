@@ -1,21 +1,5 @@
 from conans import ConanFile, CMake, tools
 
-FILAMENT_FLAGS = {
-    "FILAMENT_ENABLE_JAVA": False,
-    "FILAMENT_SKIP_SAMPLES": True,
-    "FILAMENT_ENABLE_LTO": False,
-    "FILAMENT_BUILD_FILAMAT": False,
-    "FILAMENT_SUPPORTS_METAL": False,
-    "FILAMENT_SUPPORTS_VULKAN": False,
-    "FILAMENT_GENERATE_JS_DOCS": False,
-    "FILAMENT_INSTALL_BACKEND_TEST": False,
-    "FILAMENT_USE_EXTERNAL_GLES3": False,
-}
-
-
-def flag_to_option(flag):
-    return flag.replace("FILAMENT_", "").lower()
-
 
 class FilamentConan(ConanFile):
     name = "filament"
@@ -29,8 +13,28 @@ class FilamentConan(ConanFile):
     settings = ("os", "compiler", "build_type", "arch")
     generators = "cmake"
     build_requires = "cmake_installer/3.14.5@conan/stable"
-    options = {flag_to_option(opt): [True, False] for opt in FILAMENT_FLAGS.keys()}
-    default_options = {flag_to_option(opt): value for opt, value in FILAMENT_FLAGS.items()}
+    options = {
+        "enable_java": [True, False],
+        "skip_samples": [True, False],
+        "enable_lto": [True, False],
+        "build_filamat": [True, False],
+        "supports_metal": [True, False],
+        "supports_vulkan": [True, False],
+        "generate_js_docs": [True, False],
+        "install_backend_test": [True, False],
+        "use_external_gles3": [True, False],
+    }
+    default_options = {
+        "enable_java": False,
+        "skip_samples": True,
+        "enable_lto": False,
+        "build_filamat": True,
+        "supports_metal": False,
+        "supports_vulkan": False,
+        "generate_js_docs": False,
+        "install_backend_test": False,
+        "use_external_gles3": False,
+    }
 
     def source(self):
         git = tools.Git(folder="filament")
@@ -39,13 +43,21 @@ class FilamentConan(ConanFile):
         tools.replace_in_file("filament/CMakeLists.txt", "project(TNT)",
                               '''project(TNT)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup()''')
+conan_basic_setup()
+''')
 
     def _configure_cmake(self):
         cmake = CMake(self)
 
-        for flag in FILAMENT_FLAGS.keys():
-            cmake.definitions[flag] = "ON" if self.options[flag_to_option(flag)] else "OFF"
+        cmake.definitions["FILAMENT_ENABLE_JAVA"] = self.options.get_safe("enable_java", False)
+        cmake.definitions["FILAMENT_SKIP_SAMPLES"] = self.options.get_safe("skip_samples", False)
+        cmake.definitions["FILAMENT_ENABLE_LTO"] = self.options.get_safe("enable_lto", False)
+        cmake.definitions["FILAMENT_BUILD_FILAMAT"] = self.options.get_safe("build_filamat", False)
+        cmake.definitions["FILAMENT_SUPPORTS_METAL"] = self.options.get_safe("supports_metal", False)
+        cmake.definitions["FILAMENT_SUPPORTS_VULKAN"] = self.options.get_safe("supports_vulkan", False)
+        cmake.definitions["FILAMENT_GENERATE_JS_DOCS"] = self.options.get_safe("generate_js_docs", False)
+        cmake.definitions["FILAMENT_INSTALL_BACKEND_TEST"] = self.options.get_safe("install_backend_test", False)
+        cmake.definitions["FILAMENT_USE_EXTERNAL_GLES3"] = self.options.get_safe("use_external_gles3", False)
 
         cmake.configure(source_dir="filament")
 
