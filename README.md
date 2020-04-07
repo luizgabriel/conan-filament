@@ -1,6 +1,6 @@
-# Filament Conan Package
  [ ![Download](https://api.bintray.com/packages/luizgabriel/conan-repo/filament%3Agoogle/images/download.svg) ](https://bintray.com/luizgabriel/conan-repo/filament%3Agoogle/_latestVersion)
 
+# Filament Conan Package
 The Google's [Filament](https://github.com/google/filament) Rendering Engine as a conan package.
 
 ## Installation
