@@ -1,5 +1,4 @@
 from conans import ConanFile, CMake, tools
-import os
 
 FILAMENT_FLAGS = {
     "FILAMENT_ENABLE_JAVA": False,
@@ -17,6 +16,7 @@ FILAMENT_FLAGS = {
 def flag_to_option(flag):
     return flag.replace("FILAMENT_", "").lower()
 
+
 class FilamentConan(ConanFile):
     name = "filament"
     version = "1.5.2"
@@ -28,7 +28,7 @@ class FilamentConan(ConanFile):
     topics = ("graphics", "3d", "filament", "google")
     settings = ("os", "compiler", "build_type", "arch")
     generators = "cmake"
-    #build_requires = "cmake_installer/3.15.5@conan/stable"
+    build_requires = "cmake_installer/3.14.5@conan/stable"
     options = {flag_to_option(opt): [True, False] for opt in FILAMENT_FLAGS.keys()}
     default_options = {flag_to_option(opt): value for opt, value in FILAMENT_FLAGS.items()}
 
@@ -39,30 +39,13 @@ class FilamentConan(ConanFile):
         tools.replace_in_file("filament/CMakeLists.txt", "project(TNT)",
                               '''project(TNT)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-set(CONAN_DISABLE_CHECK_COMPILER ON)
 conan_basic_setup()''')
 
-    @property
-    def opt_toolset(self):
-        return self.settings.get_safe("compiler.toolset")
-
-    def _cmake_define(self, cmake, definition):
-        option = definition.replace("FILAMENT_", "").lower()
-        cmake.definitions[definition] = "ON" if self.options[option] else "OFF"
-
     def _configure_cmake(self):
-        cmake = CMake(self, toolset=self.opt_toolset)
+        cmake = CMake(self)
 
         for flag in FILAMENT_FLAGS.keys():
             cmake.definitions[flag] = "ON" if self.options[flag_to_option(flag)] else "OFF"
-
-        cc = self.env.get("CC", None)
-        if cc and os.path.exists(cc):
-            cmake.definitions["CMAKE_C_COMPILER"] = cc
-
-        cxx = self.env.get("CXX", None)
-        if cxx and os.path.exists(cxx):
-            cmake.definitions["CMAKE_CXX_COMPILER"] = cxx
 
         cmake.configure(source_dir="filament")
 
