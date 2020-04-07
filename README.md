@@ -16,17 +16,17 @@ bin, * -> ./bin
 ## Requirements
 To build Filament, you must first install the following tools:
 
-- CMake 3.15 (or more recent)
+- CMake 3.14 (or more recent)
 - clang 9.0 (or more recent)
 - ninja 1.8 (or more recent)
 
 ### Necessary Steps (Linux Only)
 Make sure you've installed the following dependencies:
 
-- `clang` or higher
+- `clang-7` or higher
 - `libglu1-mesa-dev`
-- `libc++-dev` (libcxx-devel and libcxx-static on Fedora) or higher
-- `libc++abi-dev` (libcxxabi-static on Fedora) or higher
+- `libc++-7-dev` (libcxx-devel and libcxx-static on Fedora) or higher
+- `libc++abi-7-dev` (libcxxabi-static on Fedora) or higher
 - `ninja-build`
 - `libxi-dev`
 
@@ -36,30 +36,12 @@ Requirements:
 - Visual Studio 2019
 - LLVM
 
-Visual Studio 2019 already comes with Clang compiler support as a toolset. So, just add these lines to your conan profile:
+Recommended profile settings:
 ```
 [settings]
-filament:compiler=Visual Studio
-filament:compiler.version=16
-filament:compiler.toolset=ClangCl
-filament:compiler.runtime=MTd
-
-[env]
-filament:CC=C://PROGRA~1/LLVM/bin/clang-cl.exe
-filament:CXX=C://PROGRA~1/LLVM/bin/clang-cl.exe
-```
-
-In other to this `ClangCl` toolchain to work, you'll need to change the `.conan\settings.yml` file with:
-```yml
-Visual Studio: &visual_studio
-    runtime: [MD, MT, MTd, MDd]
-    version: ["8", "9", "10", "11", "12", "14", "15", "16"]
-    toolset: [None, v90, v100, v110, v110_xp, v120, v120_xp,
-              v140, v140_xp, v140_clang_c2, LLVM-vs2012, LLVM-vs2012_xp,
-              LLVM-vs2013, LLVM-vs2013_xp, LLVM-vs2014, LLVM-vs2014_xp,
-              LLVM-vs2017, LLVM-vs2017_xp, v141, v141_xp, v141_clang_c2, v142, 
-              ClangCl] # <--- add this
-    cppstd: [None, 14, 17, 20]
+compiler=Visual Studio
+compiler.version=16
+compiler.runtime=MTd
 ```
 
 Here's an [example project](https://github.com/luizgabriel/Spatial.Engine) were I fully use this package.
