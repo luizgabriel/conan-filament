@@ -1,5 +1,7 @@
-# conan-filament
-The Google's Filament Rendering Engine as a conan package.
+ [ ![Download](https://api.bintray.com/packages/luizgabriel/conan-repo/filament%3Agoogle/images/download.svg) ](https://bintray.com/luizgabriel/conan-repo/filament%3Agoogle/_latestVersion)
+
+# Filament Conan Package
+The Google's [Filament](https://github.com/google/filament) Rendering Engine as a conan package.
 
 ## Installation
 
@@ -12,13 +14,6 @@ filament/1.5.2@google/stable
 # imports filament tools
 bin, * -> ./bin
 ```
-
-## Requirements
-To build Filament, you must first install the following tools:
-
-- CMake 3.14 (or more recent)
-- clang 9.0 (or more recent)
-- ninja 1.8 (or more recent)
 
 ### Necessary Steps (Linux Only)
 Make sure you've installed the following dependencies:
@@ -34,7 +29,6 @@ Make sure you've installed the following dependencies:
 
 Requirements:
 - Visual Studio 2019
-- LLVM
 
 Recommended profile settings:
 ```
