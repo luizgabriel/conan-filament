@@ -76,9 +76,9 @@ conan_basic_setup()
 
         self.cpp_info.libdirs = [lib_dir]
         self.cpp_info.libs = [
-            "backend", "filamat", "gltfio", "meshoptimizer",
-            "bluegl", "gltfio_core", "rays",
-            "camutils", "filament", "ibl", "shaders",
-            "filabridge", "filameshio", "image", "smol-v",
-            "filaflat", "geometry", "matdbg", "utils",
+            "backend", "filaflat", "geometry", "matdbg",
+            "bluegl", "filamat", "gltfio", "meshoptimizer",
+            "camutils", "filamat_lite", "gltfio_core", "shaders",
+            "dracodec", "filament", "ibl", "smol-v",
+            "filabridge", "filameshio", "image", "utils"
         ]
