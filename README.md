@@ -15,13 +15,6 @@ filament/1.5.2@google/stable
 bin, * -> ./bin
 ```
 
-## Requirements
-To build Filament, you must first install the following tools:
-
-- CMake 3.14 (or more recent)
-- clang 9.0 (or more recent)
-- ninja 1.8 (or more recent)
-
 ### Necessary Steps (Linux Only)
 Make sure you've installed the following dependencies:
 
@@ -36,7 +29,6 @@ Make sure you've installed the following dependencies:
 
 Requirements:
 - Visual Studio 2019
-- LLVM
 
 Recommended profile settings:
 ```
