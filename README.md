@@ -1,9 +1,12 @@
- [ ![Download](https://api.bintray.com/packages/luizgabriel/conan-repo/filament%3Agoogle/images/download.svg) ](https://bintray.com/luizgabriel/conan-repo/filament%3Agoogle/_latestVersion)
-
 # Filament Conan Package
 The Google's [Filament](https://github.com/google/filament) Rendering Engine as a conan package.
 
 ## Installation
+
+```shell script
+git clone https://github.com/google/filament conan-filament && cd conan-filament
+conan export . google/stable
+```
 
 In your conanfile.txt, add:
 ```
