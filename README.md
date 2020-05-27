@@ -4,7 +4,7 @@ The Google's [Filament](https://github.com/google/filament) Rendering Engine as 
 ## Installation
 
 ```shell script
-git clone https://github.com/google/filament conan-filament && cd conan-filament
+git clone https://github.com/luizgabriel/conan-filament && cd conan-filament
 conan export . google/stable
 ```
 
