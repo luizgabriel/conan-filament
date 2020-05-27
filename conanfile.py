@@ -3,7 +3,7 @@ from conans import ConanFile, CMake, tools
 
 class FilamentConan(ConanFile):
     name = "filament"
-    version = "1.5.2"
+    version = "1.7.0"
     license = "Apache License 2.0"
     homepage = "https://github.com/google/filament"
     url = "https://github.com/luizgabriel/conan-filament"
@@ -12,7 +12,6 @@ class FilamentConan(ConanFile):
     topics = ("graphics", "3d", "filament", "google")
     settings = ("os", "compiler", "build_type", "arch")
     generators = "cmake"
-    build_requires = "cmake_installer/3.14.5@conan/stable"
     options = {
         "enable_java": [True, False],
         "skip_samples": [True, False],
@@ -21,8 +20,6 @@ class FilamentConan(ConanFile):
         "supports_metal": [True, False],
         "supports_vulkan": [True, False],
         "generate_js_docs": [True, False],
-        "install_backend_test": [True, False],
-        "use_external_gles3": [True, False],
     }
     default_options = {
         "enable_java": False,
@@ -32,8 +29,6 @@ class FilamentConan(ConanFile):
         "supports_metal": False,
         "supports_vulkan": False,
         "generate_js_docs": False,
-        "install_backend_test": False,
-        "use_external_gles3": False,
     }
 
     def source(self):
@@ -56,8 +51,6 @@ conan_basic_setup()
         cmake.definitions["FILAMENT_SUPPORTS_METAL"] = self.options.get_safe("supports_metal", False)
         cmake.definitions["FILAMENT_SUPPORTS_VULKAN"] = self.options.get_safe("supports_vulkan", False)
         cmake.definitions["FILAMENT_GENERATE_JS_DOCS"] = self.options.get_safe("generate_js_docs", False)
-        cmake.definitions["FILAMENT_INSTALL_BACKEND_TEST"] = self.options.get_safe("install_backend_test", False)
-        cmake.definitions["FILAMENT_USE_EXTERNAL_GLES3"] = self.options.get_safe("use_external_gles3", False)
 
         cmake.configure(source_dir="filament")
 
