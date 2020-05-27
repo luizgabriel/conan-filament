@@ -11,7 +11,7 @@ conan export . google/stable
 In your conanfile.txt, add:
 ```
 [requires]
-filament/1.5.2@google/stable
+filament/1.7.0@google/stable
 
 [imports]
 # imports filament tools
