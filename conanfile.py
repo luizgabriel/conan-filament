@@ -3,7 +3,7 @@ from conans import ConanFile, CMake, tools
 
 class FilamentConan(ConanFile):
     name = "filament"
-    version = "1.9.9"
+    version = "1.9.21"
     license = "Apache License 2.0"
     homepage = "https://github.com/google/filament"
     url = "https://github.com/luizgabriel/conan-filament"
@@ -66,9 +66,7 @@ conan_basic_setup()
         cmake.install()
 
     def package_info(self):
-        lib_dir = f"lib/{self.settings.arch}"
-
-        self.cpp_info.libdirs = [lib_dir]
+        self.cpp_info.libdirs = ["lib/x86_64", "lib/arm64"]
         self.cpp_info.libs = [
             "backend", "filaflat", "geometry", "matdbg",
             "bluegl", "filamat", "gltfio", "meshoptimizer",
