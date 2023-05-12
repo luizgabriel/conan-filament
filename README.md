@@ -5,13 +5,13 @@ The Google's [Filament](https://github.com/google/filament) Rendering Engine as 
 
 ```shell script
 git clone https://github.com/luizgabriel/conan-filament && cd conan-filament
-conan export . google/stable
+conan export . --user google --channel stable
 ```
 
 In your conanfile.txt, add:
 ```
 [requires]
-filament/1.18.0@google/stable
+filament/1.35.0@google/stable
 
 [imports]
 # imports filament tools
@@ -27,18 +27,5 @@ Make sure you've installed the following dependencies:
 - `libc++abi-7-dev` (libcxxabi-static on Fedora) or higher
 - `ninja-build`
 - `libxi-dev`
-
-### Necessary Steps (Windows Only)
-
-Requirements:
-- Visual Studio 2019
-
-Recommended profile settings:
-```
-[settings]
-compiler=Visual Studio
-compiler.version=16
-compiler.runtime=MTd
-```
 
 Here's an [example project](https://github.com/luizgabriel/Spatial.Engine) were I fully use this package.
