@@ -3,7 +3,7 @@ The Google's [Filament](https://github.com/google/filament) Rendering Engine as 
 
 ## Installation
 
-Make sure to follow the [build prerequisites]([https://github.com/google/filament](https://github.com/google/filament/blob/main/BUILDING.md#prerequisites)).
+Make sure to follow the [build prerequisites](https://github.com/google/filament/blob/main/BUILDING.md#prerequisites).
 
 ```shell script
 git clone https://github.com/luizgabriel/conan-filament && cd conan-filament
