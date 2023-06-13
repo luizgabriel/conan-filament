@@ -10,14 +10,12 @@ git clone https://github.com/luizgabriel/conan-filament && cd conan-filament
 conan export . --user google --channel stable
 ```
 
-In your conanfile.txt, add:
+In your conanfile.py, add:
 ```
-[requires]
-filament/1.35.0@google/stable
-
-[imports]
-# imports filament tools
-bin, * -> ./bin
+def requirements(self):
+    self.requires("filament/1.38.0@google/stable", options={
+        "supports_metal": self.settings.os == "Macos",
+    })
 ```
 
 Here's an [example project](https://github.com/luizgabriel/Spatial.Engine) were I fully use this package.
