@@ -11,7 +11,7 @@ conan export . --user google --channel stable
 ```
 
 In your conanfile.py, add:
-```
+```python
 def requirements(self):
     self.requires("filament/1.38.0@google/stable", options={
         "supports_metal": self.settings.os == "Macos",
