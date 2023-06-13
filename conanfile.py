@@ -1,11 +1,12 @@
 from conan import ConanFile
 from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
 from conan.tools.scm import Git
+from conan.tools.files import replace_in_file
 
 
 class FilamentConan(ConanFile):
     name = "filament"
-    version = "1.35.0"
+    version = "1.38.0"
     license = "Apache License 2.0"
     homepage = "https://github.com/google/filament"
     url = "https://github.com/luizgabriel/conan-filament"
@@ -65,8 +66,23 @@ class FilamentConan(ConanFile):
         git.clone(url="https://github.com/google/filament.git", target=".")
         git.checkout("v" + self.version)
 
+        replace_in_file(self,
+                        file_path="filament/backend/CMakeLists.txt",
+                        search="-Wdeprecated",
+                        replace="-Wno-deprecated")
+
     def layout(self):
         cmake_layout(self)
+        self.cpp.package.libdirs = ["lib/x86_64", "lib/arm64"]
+        self.cpp.package.libs = [
+            "backend", "filamat", "gltfio_core", "mikktspace", "viewer",
+            "basis_transcoder", "filamat_lite", "ibl-lite", "shaders", "vkshaders",
+            "camutils", "filament-iblprefilter", "ibl", "smol-v", "zstd",
+            "civetweb", "filament", "image", "stb",
+            "dracodec", "filameshio", "ktxreader", "uberarchive",
+            "filabridge", "geometry", "matdbg", "uberzlib",
+            "filaflat", "gltfio", "meshoptimizer", "utils",
+        ]
 
     def generate(self):
         deps = CMakeDeps(self)
